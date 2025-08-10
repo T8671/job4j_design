@@ -6,7 +6,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 class SimpleLinkedListTest {
 
@@ -90,5 +92,30 @@ class SimpleLinkedListTest {
         assertThat(second.hasNext()).isTrue();
         assertThat(second.next()).isEqualTo(2);
         assertThat(second.hasNext()).isFalse();
+    }
+
+    @Test
+    void whenModifyListAfterIteratorCreationThenThrowConcurrentModificationException() {
+        Iterator<Integer> iterator = list.iterator();
+        list.add(3);
+        assertThatThrownBy(iterator::next)
+                .isInstanceOf(ConcurrentModificationException.class);
+    }
+
+    @Test
+    void whenNextCalledAfterLastElementThenThrowNoSuchElementException() {
+        Iterator<Integer> iterator = list.iterator();
+        iterator.next();
+        iterator.next();
+        assertThatThrownBy(iterator::next)
+                .isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    void whenGetFirstAndLastElementThenReturnCorrect() {
+        list.add(3);
+        list.add(4);
+        assertThat(list.get(0)).isEqualTo(1);
+        assertThat(list.get(3)).isEqualTo(4);
     }
 }
