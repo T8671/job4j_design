@@ -40,8 +40,13 @@ public class ForwardLinked<T> implements Iterable<T> {
         if (head == null) {
             throw new NoSuchElementException();
         }
-        T value = head.item;
+
+        Node<T> deletedNode = head;
+        T value = deletedNode.item;
         head = head.next;
+        deletedNode.item = null;
+        deletedNode.next = null;
+
         size--;
         modCount++;
         return value;
@@ -49,7 +54,7 @@ public class ForwardLinked<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
 
             private final int expectedModCount = modCount;
             ForwardLinked.Node<T> current = head;
