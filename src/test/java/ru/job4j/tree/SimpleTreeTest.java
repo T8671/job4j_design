@@ -70,4 +70,40 @@ public class SimpleTreeTest {
                 .anyMatch(node -> node.value.equals(2));
         assertThat(found).isTrue();
     }
+
+    @Test
+    void whenOnlyRootThenBinary() {
+        SimpleTree<Integer> tree = new SimpleTree<>(1);
+        assertThat(tree.isBinary()).isTrue();
+    }
+
+    @Test
+    void whenThreeNodesChainThenBinary() {
+        SimpleTree<Integer> tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(2, 3);
+        assertThat(tree.isBinary()).isTrue();
+
+    }
+
+    @Test
+    void whenThreeChildrenThenNonBinary() {
+        SimpleTree<Integer> tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        assertThat(tree.isBinary()).isFalse();
+    }
+
+    @Test
+    void whenFourChildrenOnSecondLevelThenNonBinary() {
+        SimpleTree<Integer> tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(2, 3);
+        tree.add(3, 4);
+        tree.add(3, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
+        assertThat(tree.isBinary()).isFalse();
+    }
 }
