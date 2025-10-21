@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
 
 class ConfigTest {
@@ -25,10 +26,43 @@ class ConfigTest {
     }
 
     @Test
-    void whenInvalidPairsThenException() {
-        String path = "./data/pair_with_invalid.properties";
+    void whenEmptyKeyThenException() {
+        String path = "./data/invalid_empty_key.properties";
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenEmptyValueThenException() {
+        String path = "./data/invalid_empty_value.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenNoEqualsSignThenException() {
+        String path = "./data/invalid_no_equals.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenEqualsOnlyThenException() {
+        String path = "./data/invalid_equals_only.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenExtraEqualsInValueThenParsedCorrectly() {
+        String path = "./data/valid_extra_equals.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("a")).isEqualTo("1=2");
+        assertThat(config.value("b")).isEqualTo("value=");
     }
 }
