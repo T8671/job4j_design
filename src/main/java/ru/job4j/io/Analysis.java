@@ -3,7 +3,7 @@ package ru.job4j.io;
 import java.io.*;
 
 public class Analysis {
-    public void unavailable(String source, String target) {
+    public static void unavailable(String source, String target) {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(source));
              PrintWriter writer = new PrintWriter(new FileOutputStream(target))) {
@@ -15,7 +15,7 @@ public class Analysis {
         }
     }
 
-    private void process(BufferedReader reader, PrintWriter writer) throws IOException {
+    private static void process(BufferedReader reader, PrintWriter writer) throws IOException {
         String line;
         String start = null;
         boolean down = false;
@@ -37,8 +37,8 @@ public class Analysis {
 
             String status = parts[0];
             String time = parts[1];
-            boolean bad = status.equals("400") || status.equals("500");
-            boolean good = status.equals("200") || status.equals("300");
+            boolean bad = "400".equals(status) || "500".equals(status);
+            boolean good = "200".equals(status) || "300".equals(status);
 
             if (bad && !down) {
                 down = true;
