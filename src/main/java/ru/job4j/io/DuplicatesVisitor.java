@@ -10,7 +10,7 @@ import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    Map<FileProperty, List<Path>> filePropertyListMap = new HashMap<>();
+    private final Map<FileProperty, List<Path>> filePropertyListMap = new HashMap<>();
 
     public Map<FileProperty, List<Path>> getAllFiles() {
         return filePropertyListMap;
