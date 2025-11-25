@@ -20,9 +20,26 @@ public class EchoServer {
                     String firstLine = input.readLine();
                     System.out.println(firstLine);
 
-                    if (firstLine != null && firstLine.contains("msg=Bye")) {
+                    String msg = "";
+                    if (firstLine != null && firstLine.contains("msg=")) {
+                        msg = firstLine.split("msg=")[1].split(" ")[0];
+                    }
+
+                    if ("Exit".equals(msg)) {
                         server.close();
                     }
+
+                    String responce;
+                    if ("Hello".equals(msg)) {
+                        responce = "Hello";
+                    } else if ("Exit".equals(msg)) {
+                        responce = "Shut down the server";
+                        server.close();
+                    } else {
+                        responce = msg.isEmpty() ? "" : msg;
+                    }
+
+                    output.write(responce.getBytes());
 
                     for (String string = input.readLine();
                          string != null && !string.isEmpty();
