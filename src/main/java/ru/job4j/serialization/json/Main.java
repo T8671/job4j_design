@@ -14,7 +14,7 @@ public class Main {
                 new String[]{"Ancient Scroll", "Magic Sword"});
 
         /* Преобразуем объект person в json-строку. */
-        final Gson gson = new GsonBuilder().create();
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         System.out.println(gson.toJson(wanLin));
 
         /* Создаём новую json-строку с модифицированными данными*/
