@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bookCharacter>
+    <isProtagonist>true</isProtagonist>
+    <age>30</age>
+    <name>Wan Lin</name>
+    <origin>
+        <country>China</country>
+        <era>Modern</era>
+    </origin>
+    <artifacts>
+        <artifact>Ancient Scroll</artifact>
+        <artifact>Magic Sword</artifact>
+    </artifacts>
+</bookCharacter>
