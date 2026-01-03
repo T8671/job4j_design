@@ -2,8 +2,10 @@ package ru.job4j.serialization.xml;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 import java.io.File;
+import java.io.StringReader;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -15,7 +17,7 @@ public class Main {
                 new Origin("China", "Modern"),
                 new String[]{"Ancient Scroll", "Magic Sword"});
 
-        /* Преобразуем объект person в формат XML. */
+        /* Преобразуем объект wanLin в формат XML. */
         JAXBContext context = JAXBContext.newInstance(BookCharacter.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -24,5 +26,10 @@ public class Main {
 
         /* Вывод формата XML в файл */
         marshaller.marshal(wanLin, new File("data/book_character.xml"));
+
+        /* Преобразуем формат XML в объект wanLin. */
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        BookCharacter result = (BookCharacter) unmarshaller.unmarshal(new File("data/book_character.xml"));
+        System.out.println(result);
     }
 }
