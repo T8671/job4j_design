@@ -18,6 +18,26 @@ public class BookCharacter {
         this.artifacts = artifacts;
     }
 
+    public String[] getArtifacts() {
+        return artifacts;
+    }
+
+    public Origin getOrigin() {
+        return origin;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean isProtagonist() {
+        return isProtagonist;
+    }
+
     @Override
     public String toString() {
         return "BookCharacter{"

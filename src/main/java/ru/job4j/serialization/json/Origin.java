@@ -10,6 +10,14 @@ public class Origin {
         this.era = era;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public String getEra() {
+        return era;
+    }
+
     @Override
     public String toString() {
         return "Origin{"
