@@ -1,0 +1,1 @@
+UPDATE heroes SET name = 'Бодала' WHERE name = 'Седрик';
