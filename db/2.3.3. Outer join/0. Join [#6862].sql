@@ -74,4 +74,4 @@ gender и заполнить ее.
 Исключите дублирование пар вида Вася-Маша и Маша-Вася*/
 SELECT t1.name, t2.name FROM teens t1
 CROSS JOIN teens t2
-WHERE t1.gender != t2.gender AND t1.name < t2.name;
+WHERE t1.name < t2.name;
